@@ -1,5 +1,5 @@
 {
-  "name": "file",
+  "name": "remix-boilerplate",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -19,6 +19,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0-alpha.14",
+    "tailwindcss": "^4.0.0-alpha.14",
     "@remix-run/dev": "^2.9.1",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
