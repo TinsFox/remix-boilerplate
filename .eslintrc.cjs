@@ -48,6 +48,9 @@ module.exports = {
           typescript: {},
         },
       },
+      rules: {
+        "react/self-closing-comp": ["error"],
+      },
     },
 
     // Typescript
@@ -71,6 +74,9 @@ module.exports = {
         "plugin:import/recommended",
         "plugin:import/typescript",
       ],
+      rules: {
+        "react/self-closing-comp": ["error"],
+      },
     },
 
     // Node
