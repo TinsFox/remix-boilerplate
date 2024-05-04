@@ -8,7 +8,9 @@
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "remix-serve ./build/server/index.js",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "prepare": "bunx simple-git-hooks",
+    "remove-env-values": "bun run ./scripts/remove-env-values.ts"
   },
   "dependencies": {
     "@remix-run/node": "^2.9.1",
@@ -16,12 +18,12 @@
     "@remix-run/serve": "^2.9.1",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "zod": "^3.23.6"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.0.0-alpha.14",
-    "tailwindcss": "^4.0.0-alpha.14",
     "@remix-run/dev": "^2.9.1",
+    "@tailwindcss/vite": "^4.0.0-alpha.14",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
@@ -32,11 +34,23 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "lint-staged": "^15.2.2",
+    "simple-git-hooks": "^2.11.1",
+    "tailwindcss": "^4.0.0-alpha.14",
     "typescript": "^5.1.6",
     "vite": "^5.1.0",
     "vite-tsconfig-paths": "^4.2.1"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --cache --fix",
+      "prettier --ignore-path ./.gitignore --write "
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "remove-env-values && bunx lint-staged"
   }
 }
