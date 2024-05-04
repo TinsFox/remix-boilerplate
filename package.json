@@ -51,6 +51,6 @@
     ]
   },
   "simple-git-hooks": {
-    "pre-commit": "remove-env-values && bunx lint-staged"
+    "pre-commit": "bun run remove-env-values && bunx lint-staged"
   }
 }
