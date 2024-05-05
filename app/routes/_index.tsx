@@ -1,41 +1,38 @@
 import type { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
+import { RemixLogo } from "~/components/icons/remix";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Remix Boilerplate" },
+    { name: "description", content: "Remix Boilerplate" },
   ];
 };
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1 className="text-3xl font-bold underline">Welcome to Remix</h1>
-      <ul>
-        <li>
+    <main className="font-poppins grid h-full place-items-center">
+      <div className="grid place-items-center px-4 py-16 ">
+        <div className="flex max-w-md flex-col items-center text-center">
           <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
+            href="https://github.com/TinsFox/remix-boilerplate"
+            className="animate-slide-top [animation-fill-mode:backwards] xl:animate-slide-left xl:[animation-delay:0.5s] xl:[animation-fill-mode:backwards]"
           >
-            15m Quickstart Blog Tutorial
+            <RemixLogo />
           </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
+          <h1
+            data-heading
+            className="text-nowrap mt-8 animate-slide-top text-4xl font-medium text-foreground [animation-delay:0.3s] [animation-fill-mode:backwards] md:text-5xl xl:mt-4 xl:animate-slide-left xl:text-6xl xl:[animation-delay:0.8s] xl:[animation-fill-mode:backwards]"
           >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
-    </div>
+            <a href="https://github.com/TinsFox/remix-boilerplate">
+              Remix Boilerplate
+            </a>
+          </h1>
+          <button className="mt-8">
+            <Link to={"login"}>Login</Link>
+          </button>
+        </div>
+      </div>
+    </main>
   );
 }

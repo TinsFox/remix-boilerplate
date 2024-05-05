@@ -27,6 +27,7 @@
     "body": [
       "import { json } from \"@remix-run/node\"",
       "import type { MetaFunction, ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node'",
+      "import { useActionData } from \"@remix-run/react\";"
       "",
       "export async function action({ request }: ActionFunctionArgs) {",
       "  return json({})",
@@ -41,6 +42,8 @@
       "}]"
 
       "export default function ${TM_FILENAME_BASE/[^a-zA-Z0-9]*([a-zA-Z0-9])([a-zA-Z0-9]*)/${1:/capitalize}${2}/g}Page() {",
+      "const actionData = useActionData<typeof action>();"
+      ""
       " return (",
       "  <div>",
       "    <h1>${TM_FILENAME_BASE/[^a-zA-Z0-9]*([a-zA-Z0-9])([a-zA-Z0-9]*)/${1:/capitalize}${2}/g} Route</h1>",
