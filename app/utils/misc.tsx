@@ -1,4 +1,4 @@
-import { useFormAction, useNavigation } from "@remix-run/react";
+import { useFormAction, useNavigation } from '@remix-run/react'
 
 /**
  * Returns true if the current navigation is submitting the current route's
@@ -11,23 +11,48 @@ import { useFormAction, useNavigation } from "@remix-run/react";
  * want to know if a form is submitting without specific query params.
  */
 export function useIsPending({
-  formAction,
-  formMethod = "POST",
-  state = "non-idle",
+	formAction,
+	formMethod = 'POST',
+	state = 'non-idle',
 }: {
-  formAction?: string;
-  formMethod?: "POST" | "GET" | "PUT" | "PATCH" | "DELETE";
-  state?: "submitting" | "loading" | "non-idle";
+	formAction?: string
+	formMethod?: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE'
+	state?: 'submitting' | 'loading' | 'non-idle'
 } = {}) {
-  const contextualFormAction = useFormAction();
-  const navigation = useNavigation();
-  const isPendingState =
-    state === "non-idle"
-      ? navigation.state !== "idle"
-      : navigation.state === state;
-  return (
-    isPendingState &&
-    navigation.formAction === (formAction ?? contextualFormAction) &&
-    navigation.formMethod === formMethod
-  );
+	const contextualFormAction = useFormAction()
+	const navigation = useNavigation()
+	const isPendingState =
+		state === 'non-idle'
+			? navigation.state !== 'idle'
+			: navigation.state === state
+	return (
+		isPendingState &&
+		navigation.formAction === (formAction ?? contextualFormAction) &&
+		navigation.formMethod === formMethod
+	)
+}
+
+export function getDomainUrl(request: Request) {
+	const host =
+		request.headers.get('X-Forwarded-Host') ??
+		request.headers.get('host') ??
+		new URL(request.url).host
+	const protocol = host.includes('localhost') ? 'http' : 'https'
+	return `${protocol}://${host}`
+}
+
+/**
+ * Combine multiple header objects into one (uses append so headers are not overridden)
+ */
+export function combineHeaders(
+	...headers: Array<ResponseInit['headers'] | null | undefined>
+) {
+	const combined = new Headers()
+	for (const header of headers) {
+		if (!header) continue
+		for (const [key, value] of new Headers(header).entries()) {
+			combined.append(key, value)
+		}
+	}
+	return combined
 }
